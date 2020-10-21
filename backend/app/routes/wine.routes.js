@@ -18,8 +18,6 @@ module.exports = app => {
     // Delete a wine with id
     router.delete("/:id", wines.delete);
   
-    // Delete all wines
-    router.delete("/", wines.deleteAll);
   
     app.use('/api/wines', router);
   };

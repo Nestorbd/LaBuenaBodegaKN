@@ -6,7 +6,7 @@ const Op = db.Sequelize.Op;
 // req --> request (contains the body)
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.brand || !req.body.model) {
+  if (!req.body.name || !req.body.type || !req.body.description || !req.body.price || !req.body.quantity) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
@@ -77,17 +77,52 @@ exports.findOne = (req, res) => {
     });
 };
 
-// Update a Tutorial by the id in the request
+// Update a Wine by the id in the request
 exports.update = (req, res) => {
-  
+  const id = req.params.id;
+
+  Wine.update(req.body, {
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Wine was updated successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot update Wine with id=${id}. Maybe Wine was not found or req.body is empty!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Wine with id=" + id
+      });
+    });
 };
 
-// Delete a Tutorial with the specified id in the request
+// Delete a Wine with the specified id in the request
 exports.delete = (req, res) => {
-  
-};
+  const id = req.params.id;
 
-// Delete all Tutorials from the database.
-exports.deleteAll = (req, res) => {
-  
+  Wine.destroy({
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Wine was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Wine with id=${id}. Maybe Wine was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Wine with id=" + id
+      });
+    });
 };
