@@ -9,7 +9,7 @@ import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.Volley
 
 class WineSingleton constructor(context: Context) {
-    val baseUrl = "http://localhost:8080"
+    val baseUrl = "http://192.168.103.25:8080"
 
     companion object {
         @Volatile

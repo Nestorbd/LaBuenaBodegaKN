@@ -30,7 +30,7 @@ class WineAdapter(var wineList: ArrayList<Wine>, val context: Context) : Recycle
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(w: Wine, context: Context){
-            val url = "http://localhost:8080/img/wine-"
+            val url = "http://192.168.103.25:8080/img/wine-"
             val txt_name: TextView = itemView.findViewById(R.id.textViewName)
             val txt_type: TextView = itemView.findViewById(R.id.textViewType)
 
